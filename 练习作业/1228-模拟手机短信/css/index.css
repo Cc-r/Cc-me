@@ -1,0 +1,104 @@
+input{
+	padding: 0;
+	border: none;
+}
+ul{
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+#box{
+	width: 337px;
+	height: 632px;
+	background: url(../img/icot.png) no-repeat;
+	margin: 0 auto;
+	padding-top: 47px;
+	padding-left: 19px;
+}
+.content{
+	width: 318px;
+	/*height: 558px;*/
+	background-color: #ffffff;
+	overflow: hidden;	
+}
+.item{
+	width: 278px;
+	height: 478px;
+	padding-left: 20px;
+	padding-top: 20px;
+	overflow: auto;
+	padding-right: 20px;
+}
+.item-txt{
+	float: left;
+	width: 279px;
+	height: 41px;
+	margin-bottom: 20px;
+}
+.item-txt .item-tx{
+	float: left;
+	width: 34px;
+	height: 40px;
+}
+.item-txt div{
+	float: left;
+	word-break: break-all;
+	max-width: 190px;
+	min-height: 31px;
+	background-color: #bab3ce;
+	margin-left: 14px;
+	font-size: 16px;
+	line-height: 27px;
+	padding: 5px 20px 5px 20px;	
+}
+.txt-item{
+	float: right;
+	width: 279px;
+	height: 41px;
+	margin-bottom: 20px;
+}
+.txt-item .list-tx{
+	float: right;
+	width: 34px;
+	height: 40px;
+}
+.txt-item div{
+	float: right;
+	word-break: break-all;
+	max-width: 190px;
+	min-height: 31px;
+	background-color: #bab3ce;
+	font-size: 16px;
+	line-height: 27px;
+	margin-right: 14px;
+	padding: 5px 20px 5px 20px;	
+}
+.foot{
+	width: 318px;
+	height: 60px;
+	background-color: #e5e5e5;
+}
+.foot-tx{
+	float: left;
+	width: 34px;
+	height: 40px;
+	margin: 12px 15px 0 17px;
+}
+.txt{
+	float: left;
+	width: 190px;
+	height: 40px;
+	margin-top: 11px;
+	font-size: 20px;
+	padding: 0 20px;
+	box-sizing: border-box;
+}
+.send{
+	width: 60px;
+	height: 60px;
+	border: none;
+	font-size: 16px;
+	line-height: 60px;
+	color: #e15671;
+	background-color: #e5e5e5;
+}

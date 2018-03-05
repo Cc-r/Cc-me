@@ -1,0 +1,53 @@
+p{
+	margin: 0;
+}
+
+#box{
+	width: 530px;
+	height: 250px;
+	background: url(../img/beij.png) no-repeat;
+	margin: 0 auto;
+	padding: 50px 0 0 70px;
+}
+.content{
+	width: 370px;
+	height: 115px;
+	background: url(../img/icot.png) no-repeat;
+	padding: 85px 0 0 90px;
+	
+}
+.cont{
+	width: 280px;
+	height: 30px;	
+}
+.cont span{
+	float: left;
+	width: 30px;
+	height: 30px;
+	background: url(../img/icot-1.png) no-repeat;
+	margin-right: 12px;
+}
+.cont .span1{
+	float: left;
+	width: 30px;
+	height: 30px;
+	background: url(../img/icot-3.png) no-repeat;
+	opacity: .3;
+}
+.cont .span2{
+	float: left;
+	width: 30px;
+	height: 30px;
+	background: url(../img/icot-3.png) no-repeat;
+}
+#info{
+	float: right;
+	width: 60px;
+	height: 30px;
+	background-color: #e15671;
+	font-size: 16px;
+	line-height: 30px;
+	text-align: center;
+	color: #fff;	
+	display: none;
+}

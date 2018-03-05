@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>百度文库二</title>
+		<style>
+			body,h1{
+				margin: 0;
+			}
+			#box{
+				width: 460px;
+				height: 200px;
+				margin: 100px auto;
+				border: 1px solid rgba(0,0,0,0.2);
+				border-radius: 8px;
+			}
+			#head{
+				height: 31px;
+				padding-top: 23px;
+				margin-bottom: 31px;
+			}
+			#head h1{
+				float: left;
+				width: 124px;
+				height: 31px;
+				font: bold 20px/30px "微软雅黑";
+				margin: 0 16px 0 109px;
+			}
+			#head span{
+				float: left;
+				height: 20px;
+				margin-top: 7px;
+				border-left: 3px solid #000000;
+				font: 18px/18px "微软雅黑";
+				padding: 0 10px;
+			}
+			#item{
+				height: 30px;
+				margin-bottom: 27px;
+				padding-left: 85px;
+			}
+			#item a{
+				display: inline-block;
+				width: 30px;
+				height: 30px;
+				margin: 0 5px;
+				vertical-align: top;
+				border: 1px solid #000000;
+				border-radius: 15px;
+			}
+			.two{
+				background-color: red;
+				opacity: 0.4;
+			}
+			.other{
+				background-color: red;
+			}
+			#info{
+				opacity: 0;
+				display: inline-block;
+				width: 60px;
+				height: 30px;
+				font: 14px/30px "微软雅黑";
+				color: #fff;
+				background-color: #e15671;
+				text-align: center;
+				border-radius: 5px;
+				vertical-align: top;
+				margin: 0 15px;	
+			}
+			#foot{
+				height: 58px;
+				background-color: #e15671;
+				font: 14px/58px arial,"微软雅黑";
+				color: #fff;
+				text-align: center;
+				border-radius:  0 0 8px 8px;
+			}
+			.radius{
+				border: 1px solid #fff;
+				display: inline-block;
+				width: 14px;
+				height: 14px;
+				line-height: 14px;
+				border-radius: 7px;
+			}
+		</style>
+	</head>
+	<body>
+		<section id="box">
+			<header id="head">
+				<h1>百度文库打分</h1>
+				<span>总体评价</span>
+			</header>
+			<div id="item">
+				<a href="javascript:;"></a>
+				<a href="javascript:;"></a>
+				<a href="javascript:;"></a>
+				<a href="javascript:;"></a>
+				<a href="javascript:;"></a>
+				<div id="info"></div>
+			</div>
+			<footer id="foot">
+				<span class="radius">!</span>
+				<span>小提示：点击星星就能打分</span>
+			</footer>
+		</section>
+	<script>
+		var item = document.getElementById('item');
+		var imgs = item.querySelectorAll('a');
+		var info = document.getElementById('info');
+		var text = ['极差','一般','不错','推荐','力荐'];
+		var state = -1;
+		function imgreset(){
+			for(var i = 0; i < imgs.length; i++){
+				imgs[i].className = '';
+			}
+		}
+		for (var i = 0; i < imgs.length; i++) {
+			imgs[i].anow = i;
+			imgs[i].onmouseover = function(){
+				imgreset();
+				info.style.opacity = 1;
+				info.innerHTML = text[this.anow];
+				for( var i = 0; i <= this.anow; i++){
+					if(this.anow < 2){
+						imgs[i].className = 'two';
+					}else {
+						imgs[i].className = 'other';
+					}
+				}
+			}
+			imgs[i].onclick = function(){
+				info.innerHTML = text[this.anow];
+				imgreset();
+				for(var i = 0; i <= this.anow; i++){
+					if(this.anow < 2){
+						imgs[i].className = 'two';
+					}else {
+						imgs[i].className = 'other';
+					}
+				}
+				state = this.anow;
+			}
+			imgs[i].onmouseout = function(){
+				info.style.opacity = 0;
+				imgreset();
+				if( state > -1){
+					info.style.opacity = 1;
+					info.innerHTML = text[state];
+					for(var i = 0; i <= state; i++){
+						if(state < 2){
+							imgs[i].className = 'two';
+						}else {
+							imgs[i].className = 'other';
+						}
+					}
+				}
+			}
+		}
+	</script>
+	</body>
+</html>
+

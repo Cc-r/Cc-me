@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		body {
+			font-size: 14px;
+			font-family: "Lantinghei SC Extralight",Arial;
+		}
+		ul {
+			padding: 0;
+			margin: 0;
+			list-style: none;
+		}
+		a {
+			text-decoration: none;
+		}
+		img {
+			vertical-align: top;
+		}
+		#wrap {
+			width: 760px;
+			height: 260px;
+			margin: 100px auto;
+			padding: 145px 120px 95px;
+			background: url(img/bg.jpg) no-repeat 0 0;
+		}
+		#section {
+			width: 760px;
+			height: 260px;
+			-moz-box-shadow: 0px 0px 4px rgba(0,0,0,.2); 
+			box-shadow: 0px 0px 4px rgba(0,0,0,.2);
+		}
+		#choose {
+			width: 760px;
+			height: 50px;
+			margin: 0 auto;
+			background: url(img/nav_bg.png) no-repeat 0 0;
+			line-height: 50px;
+			text-indent: 21px;
+		}
+		#type {
+			width: 100%;
+			height: 210px;
+			background: url(img/type_bg.png) no-repeat 0 0;
+			padding: 17px 0 16px 28px;
+		}
+		#type li {
+			height: 44px;
+			color: #8a8a8a;
+			line-height: 44px;
+		}
+		#type a {
+			margin: 0 12px 0 11px;
+			color: #000;
+		}
+		#choose mark {
+			position: relative;
+			display: inline-block;
+			height: 24px;
+			line-height: 24px;
+			border: 1px solid #28a5c4;
+			color: #28a5c4;
+			margin: 12px 5px 0;
+			background: none;
+			padding: 0 30px 0 6px;
+			text-indent: 0;
+		}
+		#choose mark a {
+			position: absolute;
+			top: 3px;
+			right: 2px;
+			display: inline-block;
+			width: 18px;
+			height: 18px;
+			background: #28a5c4;
+			color: #fff;
+			line-height: 18px;
+			font-size: 16px;
+			text-align: center;
+		}
+		#type .red{
+			color: red;
+		}
+	</style>
+</head>
+<body>
+	<div id="wrap">
+		<section id="section">
+			<nav id="choose">
+			你的选择: 
+				<span class="choose">
+					<!-- <mark>苹果 <a href="javascript:;">x</a></mark> -->
+				</span>
+			</nav>
+			
+			<ul id="type">
+				<li>
+					品牌：
+					<a href="javascript:;">苹果</a>
+					<a href="javascript:;">小米</a>
+					<a href="javascript:;">锤子</a>
+					<a href="javascript:;">魅族</a>
+					<a href="javascript:;">华为</a>
+					<a href="javascript:;">三星</a>
+					<a href="javascript:;">OPPO</a>
+					<a href="javascript:;">vivo</a>
+					<a href="javascript:;">乐视</a>
+					<a href="javascript:;">360</a>
+					<a href="javascript:;">中兴</a>
+					<a href="javascript:;">索尼</a>
+				</li>
+				<li>
+					尺寸：
+					<a href="javascript:;">3.0英寸以下</a>
+					<a href="javascript:;">3.0-3.9英寸</a>
+					<a href="javascript:;">4.0-4.5英寸</a>
+					<a href="javascript:;">4.6-4.9英寸</a>
+					<a href="javascript:;">5.0-5.5英寸</a>
+					<a href="javascript:;">6.0英寸以上</a>
+				</li>
+				<li>
+					系统：
+					<a href="javascript:;">安卓 ( Android )</a>
+					<a href="javascript:;">苹果 ( IOS )</a>
+					<a href="javascript:;">微软 ( WindowsPhone )</a>
+					<a href="javascript:;">无</a>
+					<a href="javascript:;">其他</a>
+				</li>
+				<li>
+					网络：
+					<a href="javascript:;">联通3G</a>
+					<a href="javascript:;">双卡单4G</a>
+					<a href="javascript:;">双卡双4G</a>
+					<a href="javascript:;">联通4G</a>
+					<a href="javascript:;">电信4G</a>
+					<a href="javascript:;">移动4G</a>
+				</li>
+			</ul>
+		</section>
+	</div>
+	<script>
+		
+		var type = document.querySelector("#type");
+		var lis = type.querySelectorAll("li");
+		var chooseBox = document.querySelector("#choose")
+		//记录被点击过的a标签的内容
+		var choose = {
+			// 2:"",
+			// 1:"",
+			// 3:"",
+			// 0:""
+		}
+		//console.log(choose)
+		for(var i = 0; i < lis.length;i++){
+			lis[i].index = i;
+			var lisA = lis[i].children;
+
+			//给每个a标签添加点击事件
+			for(var j = 0; j < lisA.length; j++){
+				lisA[j].onclick = function(){
+					//找到同级其他的a标签
+					var a = this.parentNode.children;
+
+					//清除其它标红的颜色
+					for(var i = 0; i <a.length;i++){
+						a[i].style.color = "";
+					}
+					//当前被点击的a标签
+					this.style.color = "red";
+					//把选中的a标签的内容保存到choose中，以便其他地方使用
+					choose[this.parentNode.index] = this.innerHTML;
+					//创建头部显示的内容
+					var chooseInfo = "你的选择：";
+					for(var key in choose){
+						if(choose[key]){
+							chooseInfo +='<mark><span>'+choose[key]+'</span><a index="'+key+'" href="javascript:;">x</a></mark>'
+						}
+						
+					}
+					//把内容结构放到头部结构里
+					chooseBox.innerHTML = chooseInfo
+					//找到所有已经生成的a标签
+					var chooseA = chooseBox.getElementsByTagName("a");
+
+					for(var i = 0; i < chooseA.length; i++){
+						chooseA[i].onclick = function(){
+							this.parentNode.remove();//删除显示的按钮
+							//清除列表中被标记了颜色的a标签的样式
+							var index = this.getAttribute("index");
+							//console.log(index)
+							//同时删除choose对应的数据
+							 choose[index] = null;
+							//找到对应的所有a标签，来个大清除
+							var lis_a = lis[index].children;
+							for(var i = 0; i < lis_a.length; i++){
+								lis_a[i].style.color = "";
+							}
+						}
+					}
+				}
+			}
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/new_file.css"/>
+	</head>
+	<body>
+		<section id="box">
+			<div class="content">
+				<div id="cont">
+					<!--<div></div>
+					<div></div>	
+					<div></div>
+					<div></div>
+					<div></div>-->
+					
+				</div>				
+				<button id="btn">生成</button>
+			</div>			
+		</section>
+		
+		<script>
+			var oCont = document.querySelector('#cont');
+			
+			var str = '';
+			
+			for(var i = 0; i < 5; i++){
+				if(i<=2){
+					str+='<div style="left:'+(i*50)+'px;bottom:'+(i)*50+'px;display: block;">'+(i+1)+'</div>'
+				}else{
+					str+='<div style="left:'+(i*50)+'px;bottom:'+(4-i)*50+'px;display: block;">'+(i+1)+'</div>'
+				}
+			}
+			console.log(str)
+			oCont.innerHTML = str;
+		</script>
+	</body>
+</html>

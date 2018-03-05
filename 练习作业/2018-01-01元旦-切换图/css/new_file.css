@@ -1,0 +1,42 @@
+#box{
+	position: relative;
+	width: 873px;
+	height: 550px;
+	background: url(../img/beij.png) no-repeat;
+	margin: 0 auto;
+}
+/*上一组,下一组*/
+.top-one,.group{
+	position: absolute;
+	top: 54px;
+	left: 22px;
+	width: 66px;
+	height: 16px;
+	border: 2px solid #efefef;
+	border-radius: 6px;
+	background-color: #fff;
+	font-size: 12px;
+	line-height: 12px;
+}
+.group{
+	left: 98px;
+}
+/*图*/
+.content{
+	position: absolute;
+	top: 112px;
+	left: 49px;
+	width: 448px;
+	height: 292px;
+}
+.map{	
+	width: 448px;
+	height: 245px;
+}
+.first{
+	text-align: center;
+	font-size: 12px;
+	line-height: 12px;
+	margin-top: 10px;
+	font-weight: bold;
+}

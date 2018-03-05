@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="tools.js"></script>
+		<style>
+			*{
+				margin:0px;
+				padding:0px;
+			}
+			body{
+				background: #232323; color: #fff; font-family: "微软雅黑"}
+			img{
+				width: 150px;
+				height: 210px;
+				border: none;
+				vertical-align: top;
+			}
+			#box{
+				width: 1200px;
+				height: 210px;
+				margin: 100px auto;
+			}
+			ul li{
+				list-style: none;
+				vertical-align: top;
+				width: 150px;
+				height: 210px;
+				overflow: hidden;
+				float: left;
+				position: relative;
+			}
+			ul li p{
+				width: 150px;
+				height: 420px;
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<ul id="list">
+				<li>
+					<p>
+						<img src="img/0.png"/>
+						<img src="img/0.png"/>
+					</p>
+				</li>
+				<li>
+					<p>
+						<img src="img/0.png"/>
+						<img src="img/0.png"/>
+					</p>
+				</li>
+				<li>
+					<p>
+						<img src="img/fuh.png"/>
+					</p>
+				</li>
+				<li>
+					<p>
+						<img src="img/0.png"/>
+						<img src="img/0.png"/>
+					</p>
+				</li>
+				<li>
+					<p>
+						<img src="img/0.png"/>
+						<img src="img/0.png"/>
+					</p>
+				</li>
+				<li>
+					<p>
+						<img src="img/fuh.png"/>
+					</p>
+				</li>
+				<li>
+					<p>
+						<img src="img/0.png"/>
+						<img src="img/0.png"/>
+					</p>
+				</li>
+				<li>
+					<p>
+						<img src="img/0.png"/>
+						<img src="img/0.png"/>
+					</p>
+				</li>
+			</ul>
+		</div>
+		
+		<script>
+			//小于10的数，补0
+			function addZero(n){
+				return n < 10 ? "0"+n : n;
+			}
+			
+			var d = new Date();
+			var h = d.getHours();//时
+			var m = d.getMinutes();//分
+			var s = d.getSeconds();//秒
+			//拼接时分秒
+			var time = addZero(h)+':'+addZero(m)+':'+addZero(s);
+			console.log(time)//17:17:104
+			
+			//时间点映射给每个p标签的第一个img
+			var timep = document.querySelectorAll('#list p');
+
+			for(var i = 0; i < time.length; i++){//循环时分秒
+				var imgs = timep[i].querySelectorAll('img')//获取所有的img
+				if(time[i] === ':'){
+					//当所有的时分秒 等于：，就跳过，直接走else里面的img
+				}else{
+					imgs[0].src  = 'img/'+time[i]+'.png'
+				}
+			}
+			//添加定时器
+			setInterval(function(){
+				var d = new Date();
+				var h = d.getHours();//时
+				var m = d.getMinutes();//分
+				var s = d.getSeconds();//秒
+				//获取最新时间
+				var now = addZero(h)+':'+addZero(m)+':'+addZero(s);
+				
+				//上一个时间点和最新时间点相比较，哪个字符不同，就让那个p标签运动
+				for(var i = 0; i < time.length; i++){
+					if(time[i] === ':'){//判断当time里的img等于冒号
+						var abc = timep[i].querySelector('img')//给img声明一个变量
+						abc.src = "img/fuh.png";//找到冒号的图片
+						console.log(abc)
+						//开启一个定时器让冒号每500毫秒闪一次
+						setTimeout(function(abc){
+							abc.src = "img/nfh.png";//500毫秒后，这个变量保存的是p标签里的第二个冒号图片
+						},500,abc)
+					}
+					if(time[i] !== now[i]){//引用外部js，运行之前先把top值改为0
+						css(timep[i],'top',0)
+						var imgs = timep[i].querySelectorAll('img')
+						imgs[0].src = 'img/'+time[i]+'.png';//走的是上一个时间
+						imgs[1].src = 'img/'+now[i]+'.png';//走的是最新的时间
+						
+						animate(timep[i],'top',-210,500,'linear')//调用函数让图片动起来
+					}
+				}
+				time = now//以上操作完成后，把now最新的时间赋值给time，然后再过一秒之后time记录的是上一秒的时间，now是最新的时间
+			},1000)
+//			var img = document.querySelectorAll('img')
+//			var num = true;//设置一开关
+//			//定时器让：每隔半秒闪起来
+//			setInterval(function(){
+//				if(num){//判断num为true的时候走下面空白图片
+//					img[4].src = "img/nfh.png";
+//					img[9].src = "img/nfh.png";
+//				}else{//num为false走：图片
+//					img[4].src = "img/fuh.png";
+//					img[9].src = "img/fuh.png";
+//				}
+//				num = !num
+//			},500)
+			
+		</script>
+	</body>
+</html>

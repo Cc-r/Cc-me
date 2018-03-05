@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			ul{
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+			.f1{
+				float: left;
+			}
+			.fr{
+				float: right;
+			}
+			#box{
+				width: 622px;
+				height: 356px;
+				background: url(img/beiji.png) no-repeat;
+				margin: 0 auto;
+				padding-left: 142px;
+				padding-top: 50px;
+			}
+			.content{
+				width: 480px;
+				height: 300px;
+				background: url(img/icot.png) no-repeat;
+				
+			}
+			.list{
+				width: 100%;
+				padding-top: 19px;
+				margin-bottom: 17px;
+			}
+			.list li{
+				height: 36px;
+				font-size: 16px;
+				line-height: 36px;
+				text-indent: 10px;
+				padding:  0 32px;
+			}
+			.list li:nth-of-type(even){
+				background-color: pink;
+			}
+			div{
+				width: 12px;
+				height: 12px;
+				border: 1px solid #000000;
+				margin-top: 10px;
+			}
+			.foot{
+				height: 47px;
+				font-size: 20px;
+				line-height: 47px;
+				text-indent: 5px;
+				padding:  0 32px;
+				color: #fff;
+			}
+			.foot div{
+				margin-top: 15px;
+			}
+			.list li:hover{
+				background-color: #e6748b;
+			}
+		</style>
+	</head>
+	<body>
+		<section id="box">
+			<div class="content">
+				<ul class="list">
+					<li>
+						<div class="f1"></div>
+						<span class="f1">私奔</span>
+						<span class="fr">梁博</span>
+					</li>
+					<li>
+						<div class="f1"></div>
+						<span class="f1">私奔</span>
+						<span class="fr">梁博</span>
+					</li>
+					<li>
+						<div class="f1"></div>
+						<span class="f1">私奔</span>
+						<span class="fr">梁博</span>
+					</li>
+					<li>
+						<div class="f1"></div>	
+						<span class="f1">私奔</span>
+						<span class="fr">梁博</span>
+					</li>
+					<li>
+						<div class="f1"></div>			
+						<span class="f1">私奔</span>
+						<span class="fr">梁博</span>	
+					</li>
+					<li>
+						<div class="f1"></div>	
+						<span class="f1">私奔</span>
+						<span class="fr">梁博</span>	
+					</li>
+				</ul>
+				<footer class="foot">
+					<div class="f1"></div>
+					<span>全选</span>
+				</footer>
+			</div>
+		</section>
+		
+		
+		<script>
+			var Uls = document.querySelector('.ul')//生成ul变量
+			var Lis = document.getElementsByTagName('li')//生成li变量
+			var divs = document.querySelectorAll('li div')//生成li下面的div变量
+			
+			var n = 0;//记录选中几个li
+			
+			for(var i = 0; i < Lis.length; i++){//给每一个li for循环
+				Lis[i].index = i;//添加一个索引值	
+				Lis[i].n = 1//自定一个值用来判断
+				Lis[i].onclick = function(){//给每个li绑定点击事件
+					if(this.n == 1){//当点击到当前元素时背景色变色
+						this.style.background = '#e6748b'//每个li背景变为设置的颜色
+						divs[this.index].style.background = "red"//前面框变为选中设置的红色
+						this.n = 2//将判断值改为2
+						n++;
+					}else{//当判断值为2，再次点击的时候清空li及divs的颜色
+						this.style.background = ''
+						divs[this.index].style.background = ""
+						this.n = 1//将判断值改为初始状态
+						n--;
+					}
+					if(n == Lis.length){
+						oDiv.style.background = 'red';
+					}else{
+						oDiv.style.background = '';
+					}
+				}
+			}
+			
+			var oDiv = document.querySelector('.foot div')//生成全选变量
+			//获取全选框点击事件
+			oDiv.c = 0;//自定义用来判断
+			oDiv.onclick = function(){//绑定全选的点击事件	
+				
+				if(this.c == 0){//判断当c=0的时候所有的divs框变为红色；li背景色为粉色
+					for(var i = 0; i<divs.length;i++){
+						divs[i].style.background = 'red'
+						Lis[i].style.background = '#e6748b'
+					}
+					this.style.background = 'red'//全选的框为红色
+					this.c = 1//将判断值改为当前的状态
+				}else{//当if的值为1，在次点击全选就清空所有divs框及li的颜色；
+					for(var j = 0; j<divs.length;j++){						
+						Lis[j].style.background = ''
+						divs[j].style.background = ''
+					}
+					this.style.background = ''//全选框颜色清空
+					this.c = 0//将判断值改为初始状态
+				}
+			}
+		</script>
+	</body>
+</html>

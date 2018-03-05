@@ -1,0 +1,83 @@
+
+.f1{
+	float: left;
+}
+.fr{
+	float: right;
+}
+.clearFix:after{
+	content: "";
+	display: block;
+	clear:both;
+}
+#box{
+	width: 320px;
+	height: 530px;
+	background: url(../img/beij.png) no-repeat;	
+	padding-top: 20px;
+	margin: 0 auto;
+}
+#cont{
+	height: 100px;
+	font: 40px arial;
+	line-height: 40px;
+	padding: 0 20px;
+}
+.cont-date{
+	height: 16px;
+	font: 16px arial;
+	line-height: 16px;
+	margin-top: 10px;
+	color: #0000FF;
+}
+.content{
+	height: 355px;
+	padding: 0 20px;
+}
+.content-days{
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+.content-days a{
+	margin-rigth: 10px;
+	text-decoration: none;
+}
+.cur-month{
+	margin-left: 60px;
+}
+.date-days{
+	margin-bottom: 10px;
+}
+.date-days, .date-nums{
+	width: 100%;
+	height: 40px;
+	display: flex;
+	justify-content: left;
+	align-items: left;
+}
+.date-nums {
+  height: auto;
+  flex-wrap: wrap;
+}
+.date-days span, .date-nums span{
+	width: 38px;
+	height: 38px;
+	border: 1px solid rgba(0,0,0,0);
+	text-align: center;
+	color: deeppink;
+	font: 20px arial;
+	line-height: 38px;
+	cursor: default;
+}
+.date-days span:hover, .date-nums span:hover {	
+    border-color: red;
+}
+.blue{
+	background-color: cornflowerblue;
+}
+.date-nums .color {
+  	color: #999;
+}
+.cur-month{
+	color: blue;
+}

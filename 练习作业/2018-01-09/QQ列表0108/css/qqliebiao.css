@@ -1,0 +1,46 @@
+ul{
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+h3{
+	margin: 0;
+}
+#box{
+	width: 276px;
+	height: 613px;
+	background: url(../img/qqbj.png) no-repeat;
+	padding: 66px 40px 0;
+}
+#box{
+	margin: 0 auto;
+}
+.box2{
+	width: 280px;
+	border: 1px solid #000000;
+	margin-bottom: 10px;
+}
+h3{
+	height: 30px; 
+	line-height: 30px;
+	text-indent: 20px;
+	background-color: #fff;
+	color: #e3617a;
+}
+.active{
+	background-color: palevioletred;
+	color: #fff;
+}
+ul{
+	display: none;
+}
+ul li{
+	line-height: 24px;
+	border-bottom: 1px solid #dd546f;
+	text-indent: 24px;
+	color: #fff;
+	background-color: #dd546f;
+}
+ul li:hover{
+	background-color: #999999;
+}

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 800px;
+            height: 600px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            margin: 0 auto;
+            border: 2px solid #000;
+          }
+          .content {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 20px 10px;
+          }
+          .new,.remove{
+            width: 100px;
+            height: 40px;
+            color: #fff;
+            background-color: #337ab7;
+            border-color: #2e6da4;
+            border-radius: 20px;
+          }
+          .cont {
+            overflow: hidden;
+          }
+          .cont-item {
+            width: 120px;
+            height: 120px;
+            border: 2px solid transparent;
+            border-radius: 5px;
+            float: left;
+            margin-right: 20px;
+            position: relative;
+          } 
+          .cont-item .checked {
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            border: 1px solid #2390b9;
+            left: 10px;
+            top: 10px;
+            display: none;
+            cursor: pointer;
+          }
+          .cont-item .img {
+            width: 60%;
+            height: 55%;
+            /* border: 1px solid red; */
+            background: url('./img/wenjian.png') no-repeat;
+            background-size: cover;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+          }
+          .cont-item .title {
+            position: absolute;
+            left: 50%;
+            bottom: 2px;
+            transform: translateX(-50%);
+            font-size: 12px;
+            width: 100%;
+            text-align: center;
+          }
+          
+          .cont-item:hover,
+          .cont-item.active {
+            border: 2px solid #2390b9;
+          }
+          .cont-item:hover .checked,
+          .cont-item.active .checked {
+            display: block;
+          }
+          
+          .cont-item.active .checked::after {
+            content: "✔";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <div class="content">
+            <button class="new">新建文件夹</button>
+            <button class="remove">删除文件夹</button>
+        </div>
+        <div class="cont">
+        	<!-- <div class="cont-item active">
+        		<div class="checked"></div>
+	        	<div class="img"></div>
+	        	<div class="title">
+	        		新建文件夹
+	        	</div>
+            </div> -->
+        </div>
+    </div>
+
+
+    <script>
+        var New = document.querySelector(".new")//新建文件夹
+        var remove = document.querySelector(".remove")//删除文件夹
+        var cont  = document.querySelector(".cont")//文件夹父级
+        var maxId = 1;//记录文件夹名
+
+        var data = [          
+            {
+                id:1,
+                name:"新建文件夹1"
+            }
+        ]
+        function newNode(data){
+            var folderCont = document.createElement("div")//创建节点
+            folderCont.className = "cont-item";
+
+            folderCont.innerHTML = `
+                <div class="checked"></div>
+                <div class="img"></div>
+                <div class="title" title="${data.name}">${data.name}</div>   
+            `
+
+            var checked = folderCont.querySelector(".checked")//找到小白框
+            checked.onclick = function(){//获取小白框点击事件
+                data.checked = this.parentNode.classList.toggle('active')
+            }
+            return folderCont;
+        };
+
+        function render(data){
+            cont.innerHTML = "";//清空，否则在新建文件夹的时候会出现重复添加上一个节点
+            for(var i = 0; i < data.length; i++){
+                cont.appendChild(newNode(data[i]))
+            }
+        };
+        render(data);
+        //新建文件夹点击事件
+        New.onclick = function(){
+            maxId++;
+            data.unshift({
+                id:maxId,
+                name:'新建文件夹'+ maxId
+            })
+            render(data)
+        }
+        remove.onclick = function(){
+            data = data.filter((item) =>{
+                return !item.checked
+            })
+            render(data)
+        }
+    </script>
+</body>
+</html>

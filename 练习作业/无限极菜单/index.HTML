@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html
+	<head>
+		<meta charset="UTF-8">
+		<title>无限极菜单</title>
+		<style>
+			#box{
+				width: 600px;
+				height: 600px;
+				background-color: palevioletred;
+				margin: 0 auto;				
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<ul id="oUl">
+				<li>
+					<span class="line">第一级菜单</span>
+					<ul style="display: none;" class="towUl">
+						<li><span>第二级菜单</span></li>
+						<li><span>第二级菜单</span></li>
+						<li>
+							<span>第二级菜单</span>
+							<ul style="display: none;">
+								<li><span>第三级菜单</span></li>
+								<li><span>第三级菜单</span></li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<span class="line">第一级菜单</span>
+					<ul style="display: none;" class="towUl">
+						<li><span>第二级菜单</span></li>
+						<li><span>第二级菜单</span></li>
+						<li>
+							<span>第二级菜单</span>
+							<ul style="display: none;">
+								<li><span>第三级菜单</span></li>
+								<li><span>第三级菜单</span></li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<span class="line">第一级菜单</span>
+					<ul style="display: none;" class="towUl">
+						<li><span>第二级菜单</span></li>
+						<li><span>第二级菜单</span></li>
+						<li>
+							<span>第二级菜单</span>
+							<ul style="display: none;">
+								<li><span>第三级菜单</span></li>
+								<li><span>第三级菜单</span></li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		
+		<script>
+			//多个面板只能展开一个
+			//点击同一个面板，显示的隐藏，隐藏的显示
+			var ul = document.getElementById("oUl");
+			var chiUl = ul.children;
+			console.log(chiUl);
+			var line = document.querySelectorAll(".line")//span
+			console.log(line)
+			var towUl = document.querySelectorAll(".towUl")//span
+			console.log(towUl)
+			var n = -1//用来判断是否点击
+			for(var i = 0; i < line.length; i++){//循环每个大的li的span
+				line[i].index = i;//添加一个索引值记录下标
+				line[i].onclick = function(){//获取点击事件
+					for(var j = 0; j < line.length; j++){//当点击当前的上一个隐藏
+						towUl[j].style.display = "none"
+					}
+					if(n == this.index){//判断
+						towUl[this.index].style.display = "none"
+						n = -1; //0 1 2 
+						console.log(n)
+					}else{
+						towUl[this.index].style.display = "block"
+						n = this.index// -1
+						console.log(n)
+					}
+				}
+			}
+		</script>
+	</body>
+</html>

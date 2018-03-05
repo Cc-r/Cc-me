@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <style>
+    html {
+        width: 100%;
+        height: 100%;
+    }
+    
+    body {
+        margin: 0px;
+        width: 100%;
+        height: 100%;
+    }
+    
+    .main {
+        width: 100%;
+        height: 100%;
+        background: url(./image/bg.png) no-repeat;
+        background-size: 100% 100%;
+        overflow: hidden;
+    }
+    
+    .logo {
+        display: block;
+        width: 200px;
+        height: 55px;
+        background: url(./image/logo.png) no-repeat;
+        margin: 20px auto;
+    }
+    
+    ul {
+        list-style: none;
+        font-size: 22px;
+        color: #8c949c;
+        font-weight: bold;
+    }
+    
+    ul li {
+        position: relative;
+        padding-left: 10px;
+    }
+    
+    ul li div {
+        height: 98%;
+        width: 1px;
+        border-left: 1px dotted #ccc;
+        position: absolute;
+        left: 14px;
+        top: 18px;
+    }
+    
+    ul ul {
+        display: none;
+    }
+    
+    ul li span {
+        display: block;
+        line-height: 32px;
+        padding-left: 15px;
+        background: url(./image/icon.png) no-repeat left 500px;
+    }
+    
+    ul li span.add {
+        background-position: 0px 11px;
+    }
+    
+    ul li span.line {
+        background-position: 0px -32px;
+    }
+    
+    .tree {
+        margin-left: 300px;
+    }
+    </style>
+    <script>
+    </script>
+</head>
+
+<body>
+    <div class="main">
+        <a href="http://www.miaov.com" class="logo"></a>
+        <div class="tree">
+            <ul id="oUl">
+                <li>
+                	<span class="line">第一级菜单</span>
+                    <ul>
+                        <li>
+                            <span>第二级菜单</span>
+                        </li>
+                        <li>
+                            <span>第二级菜单</span>
+                        </li>
+                        <li>
+                        	<span class="line">第二级菜单</span>
+                            <ul>
+                                <li>
+                                    <span>第三级菜单</span>
+                                </li>
+                                <li>
+                                    <span>第三级菜单</span>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <span class="line">第一级菜单</span>
+                    <ul>
+                        <li>
+                            <span>第二级菜单</span>
+                        </li>
+                        <li>
+                            <span>第二级菜单</span>
+                        </li>
+                        <li>
+                            <span class="line">第二级菜单</span>
+                            <ul>
+                                <li>
+                                    <span>第三级菜单</span>
+                                </li>
+                                <li>
+                                    <span>第三级菜单</span>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <span class="line">第一级菜单</span>
+                    <ul>
+                        <li>
+                            <span>第二级菜单</span>
+                        </li>
+                        <li>
+                            <span>第二级菜单</span>
+                        </li>
+                        <li>
+                            <span class="line">第二级菜单</span>
+                            <ul>
+                                <li>
+                                    <span>第三级菜单</span>
+                                </li>
+                                <li>
+                                    <span>第三级菜单</span>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        /*
+            1.当点击第一级菜单的时候它的子级全部出现，然后在点击子级的下一级，子级的下一级出现
+        */
+        
+        var ul = document.getElementById('oUl');//获取ul
+        for(var i = 0; i < ul.children.length;i++){
+            tab(ul.children[i])
+        }
+        //封装点击显示函数
+        function tab (L){
+            var spans = L.querySelector("span")//声明span
+            console.log(spans)
+            spans.state = true;//用来记录展开状态
+            //获取点击事件
+            spans.onclick = function(){
+                tab1(spans);//调用函数，点击后关闭父级兄弟节点的ul显示               
+                if(!this.nextElementSibling){//判断当兄弟节点不存在，则return出去
+                    return;
+                }
+
+                if(this.state){//判断当他为true，就让兄弟节点显示
+                    spans.nextElementSibling.style.display = "block"
+                    spans.className = "add"
+                    //state = false
+                }else{//为false，就关闭
+                    spans.nextElementSibling.style.display = "none"
+                    spans.className = "line"
+                    //state = true;
+                }
+                this.state = !this.state;
+            }
+            for(var i = 0; i < L.children.length; i++){
+                if(L.children[i].children.length !== 0){
+                    tab(L.children[i])
+                }
+            }
+        }
+        //    
+        function tab1(spans){
+            var n = spans.parentNode.parentNode;//spans的li的ul
+           // console.log(n)
+            for(var i = 0; i < n.children.length; i++){//给spans的父级li的所有兄弟节点调用关闭函数
+                if(n.children[i] !==spans.parentNode){//判断当n 不等于 spans的父级li
+                    tab2(n.children[i])
+                }
+            }
+        }
+        //封装关闭显示函数
+        function tab2(L){
+            //获取L下的所有ul和span
+            var uls = L.querySelectorAll("ul");
+            var spans = L.querySelectorAll("span");
+
+            for(var i = 0;i < uls.length;i++){
+                uls[i].style.display = "none"//每个ul隐藏
+                spans[i].state = true;//让每个spans初始化
+                if(spans[i].className !== ""){
+                    spans[i].className = "line";
+                }
+            }
+            if(L.children.length !== 0){//判断如果当前元素有子元素，就继续调用关闭显示函数
+                for(var i = 0; i < L.children.length; i++){
+                    tab2(L.children[i]);
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
