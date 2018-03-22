@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="btn">
+    <p id="tip"></p>
+
+    <script>
+        /*
+            开始 
+                是数字字母下划线组成  至少有一位
+                @
+                数字，字母 长度为2-5
+                点后面是字母 2-4
+
+                点后面的字母，出现1组到3组
+
+            wang@163.com
+            wang@163.com.cn
+            wang@163.com.cn.net
+            1@qq.com.cn.net
+        */
+        let re = /^\w+@([1-9a-z]{2,5})(\.[a-z]{2,4}){1,3}$/;        
+        btn.oninput = function(){
+            if(re.test(this.value)){
+                tip.innerHTML = "是邮箱"
+            }else{
+                tip.innerHTML = "不是邮箱"
+            }
+        }
+    </script>
+</body>
+</html>

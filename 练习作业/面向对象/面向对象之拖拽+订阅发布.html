@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/Custom.js"></script>
+    <style>
+        div{
+            width: 200px;
+            height: 200px;
+            background-color: aqua;
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 20px;
+            line-height: 200px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="box1">box1</div>
+    <div id="box2">box2</div>
+    <script>
+        function Drag(DragObj){
+            this.DragObj = DragObj;
+            //console.log(this.DragObj)
+            this.C = new Custom();//初始化一个订阅发布的对象
+            this.init();            
+        }
+        //初始化
+        Drag.prototype.init = function(){
+            this.DragObj.onmousedown = (ev) => {
+                this.C.emit("c-down")
+                this.downFn(ev)               
+                return false;//清除浏览器默认行为
+            }
+        }
+        //鼠标摁下函数
+        Drag.prototype.downFn = function(ev){
+            //console.log(this)
+            this.disX = ev.clientX - this.DragObj.offsetLeft;
+            this.disY = ev.clientY - this.DragObj.offsetTop;            
+            document.onmousemove = (ev) => {               
+                this.moveFn(ev)
+            }
+            document.onmouseup = (ev) => {
+                this.C.emit("c-up")
+                this.upFn(ev);
+            }            
+        }
+        //移动函数
+        Drag.prototype.moveFn = function(ev){
+            this.x = ev.clientX - this.disX;
+            this.y = ev.clientY - this.disY;
+            this.C.emit("c-move")
+            this.DragObj.style.left = this.x + "px";
+            this.DragObj.style.top = this.y + "px";
+            //this.DragObj.style.background = "pink";
+        }
+        //up鼠标抬起函数
+        Drag.prototype.upFn = function(ev){
+            document.onmousemove = document.onmouseup = null;
+        }
+        let t1 = new Drag(box1);
+        t1.C.on("c-move",function(){
+            if(t1.x < 0){
+                t1.x = 0
+            }
+            if(t1.y < 0){
+                t1.y = 0
+            }
+            t1.DragObj.style.background = "pink";        
+        })
+        let t2 = new Drag(box2);
+        //console.log(t2)
+    </script>
+</body>
+</html>

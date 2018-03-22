@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let o = {
+           a:3,
+           b:20,
+           c:[1,2,3],
+           d:null
+        }    
+        //传入数组或者对象，返回一个克隆后的对象    
+        function deepClone(obj){           
+            if(typeof obj !== "object" || obj === null){
+                throw new Error("参数出错")
+            }
+            //区分数组和对象
+            let newO = obj instanceof Array ? [] : {};
+            for(let attr in obj){
+                if(obj.hasOwnProperty(attr)){
+                    //判断值是不是对象，是对象就克隆对象，不是就直接赋址
+                    if(typeof obj[attr] === "object" && obj[attr] !== null){
+                        newO[attr] = deepClone(obj[attr])
+                    }else{
+                        newO[attr] = obj[attr]
+                    }
+                }
+                
+            }
+            return newO;
+        }
+        
+        let d = deepClone(o);
+        o.c.push(100)
+        console.log(d)
+        console.log(o)
+    </script>
+</body>
+</html>

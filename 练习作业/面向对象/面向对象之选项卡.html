@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>面向对象之选项卡</title>
+    <style>
+        #box1 div,#box2 div{
+            width: 100px;
+            height: 100px;
+            border: 1px solid #000;
+            display: none;
+        }
+        .red{
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="box1">
+        <input class="red" type="button" value="按钮1"/>
+        <input type="button" value="按钮2">
+        <input type="button" value="按钮3">
+        <div style="display:block;">按钮1</div>
+        <div>按钮2</div>
+        <div>按钮3</div>
+    </div>
+    <div id="box2">
+        <input class="red" type="button" value="按钮1"/>
+        <input type="button" value="按钮2">
+        <input type="button" value="按钮3">
+        <div style="display:block;">按钮1</div>
+        <div>按钮2</div>
+        <div>按钮3</div>
+    </div>
+    <input type="button" value="暂停第二个自动播放" id="btn1">
+    <input type="button" value="开启第一个自动播放" id="btn2">
+    <script>
+        let box1 = document.getElementById("box1")
+        let box2 = document.getElementById("box2")
+        //面向对象尽量不要使用全局变量
+        function Tab(el){
+            this.inputs = el.getElementsByTagName("input");
+            this.divs = el.getElementsByTagName("div")
+            this.n = 0;//记录标识
+            this.timer = null;
+        }
+        //初始化
+        Tab.prototype.init = function(){
+            //this 是实例调用
+            for(let i = 0; i < this.inputs.length; i++){
+                //点击用成function   this指向就是input；用箭诺函数，this就直接指向实例Tab这个函数
+                this.inputs[i].onclick = () => {
+                    this.play(i)
+                }
+            }
+        }
+        //
+        Tab.prototype.play = function(index){
+            for(let j = 0; j < this.inputs.length; j++){
+                this.inputs[j].className = "";
+                this.divs[j].style.display = "none"
+            }
+            this.inputs[index].className = "red";
+            this.divs[index].style.display = "block"
+        }
+        //自动播放
+        Tab.prototype.autoPlay = function(){            
+            this.timer = setInterval( () => {
+                this.n++
+                if(this.n > this.inputs.length - 1){
+                    this.n = 0;                    
+                }
+                this.play(this.n)
+            },1000)
+        }
+        //暂停
+        Tab.prototype.clear = function(){
+            clearInterval(this.timer)
+            this.timer = null;
+        }
+        Tab.prototype.isAutoPlay = function(){
+            return !!this.timer
+        }
+        //暂停第一个播放
+        btn1.onclick = function(){
+            if(t2.isAutoPlay()){
+                t2.clear();
+            }
+        }
+        //开始第一个播放
+        btn2.onclick = function(){
+            if(!t1.isAutoPlay()){
+                t1.autoPlay();
+            }
+        }
+        let t1 = new Tab(box1)
+        t1.init();
+        let t2 = new Tab(box2)
+        t2.init();
+        t2.autoPlay();
+    </script>
+</body>
+</html>

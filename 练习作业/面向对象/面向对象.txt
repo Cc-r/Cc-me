@@ -1,0 +1,97 @@
+面向对象是一种对现实世界理解和抽象的方法，是计算机编程技术  发展到一定阶段后的产物。
+面向对象编程(Object Oriented Programming, OOp) 是一种编程方式和思想.
+
+在面向对象语言中，理解类和对象的概念
+
+三大特性：封装 继承 多态
+
+类描述了一组有相同特性(属性)he相同行为(方法)的对象
+    属性：描述对象的特征
+    方法：对象具备的功能
+
+对象是类的具体实现
+
+ES5.1没有类的概念，是不用关键字class关键类
+用函数模拟类
+
+/工厂方法/
+创建一个工厂函数，用来生产一类对象的
+    缺点：
+        创建的悐无法识别对象的类型，无论怎么创建对象，类型都是Object
+function user(name,age){
+    let user1 = new Object(); //{}
+    user1.name = name;
+    user1.age = age;
+    user1.coding = function(){
+        console.log(1)
+    }
+    return user1;
+}
+let user2 = user("c",30);
+
+
+Array()  创建数组
+Date() 创建日期对象
+String() 创建字符串对象
+
+userInfo() 创建人物信息的对象就用函数
+
+使用new来创建对象
+    new 一元运算符
+    new 函数() 调用构造函数创建对象，这个创建过程也称之为对象实例化过程
+
+    这个函数称之为构造函数
+    new 调用函数后得到一个对象，称之为对象或者实例
+    new 调用函数后，做的事情：
+        1.在函数内部创建空的新对象
+        2.将this指向创建的新对象
+        3.执行代码(为新对象添加属性)
+        4.函数调用之后返回新对象
+
+    可以使用构造函数创建特定类型的对象
+    约定：构造函数的首字母大写
+
+    this
+        new 调用函数 -> this -> 实例
+/构造函数/
+function userInfo(name,age){
+    this.name = name;
+    this.age = age;
+}
+/实例、对象
+let n1 = new userInfo("c",20);
+console.log(n1) //userInfo1 {name: "c", age: 20}
+
+如果是多个对象共享的方法或属性，不要放在构造函数中
+放在构造函数中，每一次创建对象的时候，都要把共享的方法和属性创建一次，浪费内存
+prototype原型   
+    把同一类的对象共享的属性和方法放在原型上
+
+    每一个函数都有一个属性，教pretotype,这个就是原型
+    pretotype对应的值是一个对象(Object),称之为原型对象
+    把共享的方法挂载在原型对象上
+
+    __proto__
+        每一个对象都有属性__proto__，指向创建这个对象的构造函数的原型
+
+        对象和原型之间的桥梁
+    创建对象都，通过__proto__就保存了构造函数的原型
+
+    原型链
+        找一个属性，先在自身找，找创建这个对象的构造函数的原型，依次向上找，找到Object.prototype为止
+        没找到返回的是undefined
+
+        最顶层是Object.prototype
+
+function Coder(name,age){
+    this.name = name;
+    this.age = age;
+    //功能
+    this.coding = function(){
+        console.log(1)
+    }
+    this.city = "北京"
+}
+let n1 = new Coder("c",20)
+let n2 = new Coder("c",20)
+console.log(n1.coding === n2.coding) //false

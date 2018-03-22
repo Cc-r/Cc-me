@@ -1,0 +1,92 @@
+for ... in
+    遍历对象所有可被枚举(遍历)的属性
+    __proto__不可枚举的
+
+Object.getOwnPropertyDescriptor(对象,属性)
+    返回一个对象的某个属性的描述(特征)对象
+    自有属性指的是直接赋予该对象的属性，不需要从原型链上进行查找的属性
+Object.getOwnPropertyDescriptors(对象)
+    所有属性的描述
+返回对象
+    configurable: 是否可被删除
+    enumerable: 是否可被枚举
+    value: 值
+    writable: 是否可被改写
+
+对象.hasOwnProperty(属性名)
+    判断一个对象上的属性是否是自身的，不会沿着原型链找
+
+给对象定义属性
+    Object.defineProperty(o,"属性",描述对象)
+    描述对象:
+        configurable: 是否可被删除 默认为false
+        enumerable: 是否可被枚举 默认为false
+        value: 值 
+        writable: 是否可被改写 默认为false
+    可以添加新属性，也可以在原属性上设置
+
+in操作符
+    语法:属性 in 对象
+    语法: prop in objectName
+    检测prop是否是objectName的属性,会查找原型
+
+克隆/复制
+    浅克隆:只会克隆第一层对象
+    深度克隆:遇到对象就克隆一份
+
+克隆一个对象，克隆出来的对象和原对象一模一样
+两个对象无论嵌套多少层，没有任何联系，保持独立
+let o = {
+    a:1,
+    b:2,
+    c:[1,2,3]
+}
+let newO = Object.assign({},o)
+
+constructor 构造函数的意思
+    指向拥有这个原型的构造函数
+
+原型prototype
+    对应原型对象
+    天生有一个属性constructor
+
+instanceof
+    二元操作符
+    语法:实例 instanceof 构造函数
+
+    检测构造函数的原型在不在实例的原型链上
+    检测一个实例的原型链上是否存在构造函数的原型
+    存在 true
+    不存在 false
+function Car(){};
+Car.prototype.constructor = function(){};
+let c = new Car();
+console.log(c.constructor === Car)
+
+console.log([] instanceof Array) true;
+
+订阅发布模式
+    订阅者
+    发布者
+作用:
+    订阅发布模式定义了一种一对多的依赖关系，让多个订阅者对象同时监听某一个主题对象。
+这个主题对象在自身状态变化时，会通知所有订阅者对象，使他们能够自动更新自己的状态
+
+    一对多
+    订阅者会接到发布者的通知
+
+    一个抽象模型有两个方面，其中一方面依赖于另一方面，这时订阅发布模式可以将这两者封装在独立的对象中，
+是他们各自独立地改变和复用。订阅发布模式所做的工作其实就是在解耦合。让耦合的双方都依赖于抽象，而不是
+依赖于具体，从而使得各自的变化都不会影响另一边的变化。
+let o =  {
+    a:1
+}
+function fn(){
+    o.a = 10
+}
+/监听是否被点了
+document.onclick = function(){
+    向外广播一下，告诉外面被点了
+    fn()
+    console.log(o)
+}

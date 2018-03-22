@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box{
+            width: 200px;
+            height: 200px;
+            background-color: aqua;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+        function Drag(DragObj){
+            this.DragObj = DragObj;
+            console.log(this.DragObj)
+            this.init();
+        }
+        //初始化
+        Drag.prototype.init = function(){
+            this.DragObj.onmousedown = (ev) => {
+                this.downFn(ev)
+                return false;//清除浏览器默认行为
+            }
+        }
+        //鼠标摁下函数
+        Drag.prototype.downFn = function(ev){
+            console.log(this)
+            this.disX = ev.clientX - this.DragObj.offsetLeft;
+            this.disY = ev.clientY - this.DragObj.offsetTop;
+            document.onmousemove = (ev) => {
+                this.moveFn(ev)
+            }
+            document.onmouseup = (ev) => {
+                this.upFn(ev);
+            }            
+        }
+        //移动函数
+        Drag.prototype.moveFn = function(ev){
+            this.DragObj.style.left = ev.clientX - this.disX + "px";
+            this.DragObj.style.top = ev.clientY - this.disY + "px";
+        }
+        //up鼠标抬起函数
+        Drag.prototype.upFn = function(ev){
+            document.onmousemove = document.onmouseup = null;
+        }
+        let t1 = new Drag(box);
+        console.log(t1)
+    </script>
+</body>
+</html>

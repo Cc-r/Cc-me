@@ -1,0 +1,553 @@
+body,h1{
+    margin: 0;
+}
+ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+img{
+    vertical-align: top;
+}
+a{
+    color: #66757f;
+    text-decoration: none;
+}
+body{
+	position: relative;
+}
+html,body{
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+#warp{
+    width: 100%;
+    height: 100%;
+    min-width: 1024px;   
+    position: relative;
+}
+/* 头部 */
+.head{
+    width: 100%;
+    height: 62px;
+    background-color: #f5f8fa;
+    padding-top: 18px;
+}
+/* 头部logo */
+.head-logo{
+    width: 140px;
+    height: 32px;
+    background: url(../img/logo.png) no-repeat;
+    margin-left: 28px;
+    text-indent: -999999px;
+    float: left;
+}
+/* 右边头像和设置 */
+.head-right{
+    width: 100px;
+    height: 32px;
+    /* background-color: palevioletred; */
+    float: right;
+    margin-top: 2px;
+    margin-right: 40px;
+}
+/* 头像父级 */
+.head-tx{
+    width: 68px;
+    height: 32px;
+    border-right: 1px solid #e0e6e7;
+    float: left;
+}
+/* 头像 */
+.pic img{
+    width: 32px;
+    height: 32px;
+    float: left;
+}
+/* 箭头 */
+.pic-img img{
+    width: 10px;
+    height: 6px;
+    float: left;
+    margin-left: 10px;
+    margin-top: 15px;
+}
+/* 头部设置 */
+.head-set{
+    width: 16px;
+    height: 16px;
+    float: left;
+    margin: 8px 0 0 14px;
+}
+/* 弹框 */
+.info{
+    float: left;
+    -width: 600px;
+    height: 40px;
+    background-color: pink;
+    border-radius: 20px;
+    margin-left: 400px;
+    display: none;
+    font-size: 18px;
+    line-height: 40px;
+    text-align: center;
+    color: #ffffff;
+}
+/* 中间部分 */
+.cont{
+    -width: 100%;
+    height: 48px;
+    border-top: 1px solid #d0d9de;
+    border-bottom: 1px solid #d0d9de;
+    background-color: #ecf0f6;
+    padding: 10px 17px 0;
+}
+.nav a{
+    float: left;
+    font-size: 14px;
+    line-height: 36px;
+    background-color: #ffffff;
+    border-radius: 6px;
+    margin-right: 10px;
+    border: 1px solid #d0d9de;
+    padding: 0 20px;  
+    color: #66757f;
+}
+.nav span{
+    width: 16px;
+    height: 18px;
+    float: left;
+    margin: 10px 19px  0 0;
+}
+/* 下载 */
+.nav .download{
+    background: url(../img/xuebitu.png) no-repeat;
+}
+/* 分享 */
+.nav .share{
+    background: url(../img/xuebitu.png) no-repeat -18px 0;
+}
+/* 移动到 */
+.nav .move{
+    background: url(../img/xuebitu.png) no-repeat -36px 0;
+}
+/* 重命名 */
+.nav .Rename{
+    background: url(../img/xuebitu.png) no-repeat -54px 0;
+}
+/* 删除 */
+.nav .remove{
+    background: url(../img/xuebitu.png) no-repeat -72px 0;
+}
+/* 新建文件夹 */
+.nav .new-folder{
+    background: url(../img/xuebitu.png) no-repeat -90px 0;
+}
+/* 刷新 */
+.nav .refresh{  
+    background: url(../img/xuebitu.png) no-repeat -108px 0;
+}
+/* cont右边 */
+.cont-right{
+    float: right;
+    /* -width: 146px;
+    height: 38px;
+    background-color: palevioletred;
+    padding: 0 20px; */
+}
+.cont-r{
+    float:left;
+	width:16px;
+	height:16px;
+	border-radius:5px;
+	border:1px solid #d0d9de;
+    margin-right:10px;
+    padding: 10px;
+    background-color: #ffffff;
+}
+.cont-r a{
+    display: block;
+    width: 16px;
+    height: 16px;
+    background: url(../img/xuebitu.png) no-repeat -127px 0;
+}
+.cont-othz{
+    float: left;
+    width: 36px;
+    height: 16px;
+    border: 1px solid #d0d9de;
+    border-radius: 6px;
+    padding: 10px;
+    background-color: #ffffff;
+}
+.cont-othz .foru{
+    float: left;
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+    background: url(../img/xuebitu.png) no-repeat -145px 0;
+}
+.cont-othz .dow2{
+    float: left;
+    width: 10px;
+    height: 6px;
+    margin-top: 7px;
+    background: url(../img/xuebitu.png) no-repeat -163px 0;
+}
+/* 内容区域 */
+.content{
+    width: 100%;
+    -height: 100%;
+    position: relative;
+}
+/* 左边树形菜单 */
+.content-left{
+    width: 249px;
+    border-right: 1px solid #e1e9eb;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    font-size: 16px;
+    line-height: 32px;
+    padding: 10px 5px 0 5px;
+    color: #66737b;
+    overflow: auto;
+}
+.content-title{
+   position: relative;
+   margin-bottom: 2px;
+}
+.active{
+	background-color: paleturquoise;
+    font-size: 20px;
+}
+/* .content-title:hover{
+	background-color: #f0f3f6;
+} */
+
+/* 已打开文件夹 */
+.img1{
+    float: left;
+    width: 10px;
+    height: 7px;
+    background: url(../img/xuebitu.png) no-repeat 0 -18px;
+    margin-top: 8px;
+    margin-right: 10px;
+} 
+/* 文件夹里有东西 */
+.img2{
+    float: left;
+    width: 16px;
+    height: 15px;
+   	margin-top: 4px;
+    margin-right: 6px;
+    background: url(../img/xuebitu.png) no-repeat -21px -18px;
+}
+/* 未打开文件夹 */
+.Img1{
+    float: left;
+    width: 7px;
+    height: 10px;
+    background: url(../img/xuebitu.png) no-repeat -12px -18px;
+    margin-top: 20px;
+    margin-right: 10px;
+}
+/* 文件夹里面没有东西 */
+.Img2{
+    float: left;
+    width: 16px;
+    height: 15px;
+    margin-top: 16px;
+    margin-right: 6px;
+    background: url(../img/xuebitu.png) no-repeat -39px -18px;
+}
+/* 内容区域 右边部分 */
+.content-right{
+    padding-left: 259px;
+    height: 100%;
+    border-left: 1px solid #e1e9eb;
+}
+.content-path{
+    width: 100%;
+    height: 48px;
+    border-bottom: 2px solid #e1e8ed;
+    background-color: #ffffff;
+}
+/* 全选框 */
+.checKed{
+    float: left;
+    width: 48px;
+    height: 33px;
+    text-align: center;
+    padding-top: 15px;
+}
+.checkeD{
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 1px solid #d0d9de;
+}
+/* 路径 */
+.path a{
+    padding: 0 24px 0 14px;
+    height: 48px;
+    float: left;
+    color: #2f3334;
+    font-size: 14px;
+    line-height: 48px;
+    background: url(../img/push.png) no-repeat right center;
+}
+.path span{
+    float: left;
+    height: 48px;
+    padding: 0 14px;
+    color: #55addd;
+    line-height: 48px;
+    border-bottom: 2px solid #55addd;
+    cursor: default;
+}
+.content-right .f-empty{
+    width: 100%;
+    height: 100%;
+    display: none;
+    background: #f6f7fb url(../img/cover-bg.png) no-repeat 44% 40%;
+}
+/* 文件夹 */
+.folders{
+    padding:44px 0 0 40px;
+	width:100%;
+	height:100%;
+	box-sizing: border-box;
+	background: #f6f7fb;
+	overflow: auto;
+}
+.folder-item{  
+    float:left;
+	margin-right:40px;
+	margin-bottom:40px;
+	width:180px;
+	height:180px;
+	box-sizing: border-box;
+	background: #ebeff0;
+	border-radius: 4px;
+	position: relative;
+	line-height:120px;
+	text-align: center;
+	border:1px solid #ebeff0;
+	cursor: pointer;
+}
+.folders .active{
+    background-color: #fff;
+    border: 1px solid #54afbc;
+    box-shadow: 0px 0px 10px #d6e8f4;
+}
+.folders .folder-item:hover{
+	background: #fff;
+	border:1px solid #54afdc;
+	box-shadow: 0px 0px 10px #d6e8f4;
+}
+.folders .folder-item:hover i{
+    border: 1px solid #55addc;
+}
+/* 单选 */
+.folder-item  i{
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    left: 9px;
+    top: 9px;
+    cursor: pointer;
+    -display: none;
+}
+/* 文件夹图 */
+.folder-item .img{
+    width: 80px;
+    height: 71px;
+    background: url(../img/folder.png) no-repeat;
+    position: absolute;
+    left: 49px;
+    top: 34px;
+}
+/* 文件夹名称 */
+.folder-item  .title{
+    display: block;
+	width:150px;
+	height:20px;
+	line-height:20px;
+	color:#69737f;
+    margin:0 auto;
+    position: absolute;
+    bottom: 30px;
+    left: 12px;
+}
+.txt{
+    display:none;
+	width:120px;
+	height:20px;
+	line-height:20px;
+	color:#69737f;
+	margin:0 auto;
+    text-align: center;
+    position: absolute;
+    left: 30px;
+    bottom: 20px;
+}
+.folders .checked{
+    border:1px solid #d1d8de;
+	background: url(../img/checked.png) no-repeat;
+}
+.checKed .checked{
+	background: url(../img/checked.png) no-repeat;
+}
+/*//框选*/
+.region{
+	width: 0;
+	height: 0;
+	border: 1px dashed #d1d8de;
+	background-color: paleturquoise;
+	opacity: 0.5;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+.zhez{
+    width: 100%;
+    height: 100%;
+    background-color: #b2babf; 
+    position: absolute;
+    left: 0;
+    top: 0;   
+    opacity: 0.5;
+    display: none;   
+}
+/* 移动到弹框 */
+.Move{
+    width: 400px;
+    height: 450px;
+    border: 1px solid #2f3334;
+    position: absolute;
+    left: 50%;
+    top: 20%;
+    display: none;
+    background-color: #ffffff;
+}
+.Move-title{
+    float: left;
+    font-size: 18px;
+    line-height: 30px;
+    margin-bottom: 10px;
+    -margin-top: 5px;
+}
+.close{
+    float: right;
+    width: 20px;
+    height:20px;
+    border-left: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+    font-size: 30px;
+    line-height: 20px;
+    text-align: center;
+    /* margin-left: 400px;  */
+}
+.Move-cont{
+    float: left;
+    overflow: auto;
+    width: 350px;
+    height: 300px;
+    margin: 18px 0 25px 21px;
+    border: 1px solid #000000;
+}
+.hint{
+    float: left;
+    width: 100%;
+    height: 20px;
+    -border: 1px solid #d0d9de;
+    margin-bottom: 10px;
+    -padding-left: 20px;
+    font-size: 14px;
+    line-height: 20px;
+    color: red;
+    text-align: center;
+}
+.btn{
+    float: left;
+    width: 100%;
+    height: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.btn1,.btn2{
+    width: 80px;
+    height: 20px;
+    border: none;
+    border-radius: 10px;
+    background-color: #54afdc;
+    color: #d1d8de;
+    font-size: 20px;
+    line-height: 20px;
+}
+.cheColor{
+    background-color: #d0d9de;
+}
+/* 删除弹框 */
+.conf{
+    width: 360px;
+    height: 200px;
+    background-color: #fff;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    margin-left: -180px;
+    margin-top: -100px;
+    border-radius: 4px;
+    box-shadow: 0px 0px 6px #f1f1f1;
+    display: none;
+}
+.conf-title{
+    font: normal 18px/46px "微软雅虎";
+    padding: 0 20px;
+    margin: 0;
+    border-bottom:1px solid #ccc;
+}
+.conf-content{
+	padding:40px 40px 20px 40px;
+	text-align: center;
+}
+.conf-btn{
+	margin-top:20px;
+	padding-right:40px;
+	text-align: right;
+}
+.conf-btn a{
+	display: inline-block;
+	width:60px;
+	height:26px;
+	margin-left:10px;
+	border-radius: 15px;
+	background: #ccc;
+	text-align: center;
+	font:14px/26px "微软雅黑";
+	color:#fff;
+}
+.conf-btn a:nth-of-type(1){
+	background: #00BFFF;
+}
+.conf .close-ico{
+	position: absolute;
+	right:10px;
+	top:10px;
+	width:20px;
+	height:20px;
+	text-align: center;
+	border: 1px solid #ccc;
+	color: #ccc;
+	font:normal 16px/20px "微软雅黑";
+	cursor: pointer;
+}
+.conf .close-ico:hover{
+	background: #999;
+	color:#fff;
+}
