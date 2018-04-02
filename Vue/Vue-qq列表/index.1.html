@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>只能展开一个</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css"/>
+	</head>
+	<body>
+		<section id="box">
+			<div class="box2" v-for="item,i in tabDate">
+				<h3 @click="abc(i)">{{item.title}}</h3>
+				<ul :style="{display:i === currentIndex ? 'block' : 'none'}">
+					<li v-for="value in item.list">{{value.title}}</li>
+				</ul>
+			</div>
+        </section>
+        <script src="src/vue.js"></script>
+        <script>
+            let tabDate = [
+                {
+                    title:"我的好友",                   
+                    list:[
+                        {
+                            title:"美丽俏佳人"
+                        },
+                        {
+                            title:"美丽俏佳人"
+                        },
+                        {
+                            title:"美丽俏佳人"
+                        },
+                    ]
+                },
+                {
+                    title:"企业好友",
+                    list:[
+                        {
+                            title:"习近平"
+                        },
+                        {
+                            title:"奥巴马"
+                        }
+                    ]
+                },
+                {
+                    title:"黑名单",
+                    list:[
+                        {
+                            title:"李四"
+                        },
+                        {
+                            title:"张三"
+                        },
+                        {
+                            title:"王五"
+                        },
+                        {
+                            title:"赵六"
+                        }
+                    ]
+                }
+            ]
+
+            new Vue({
+                el:"#box",
+                data:{
+                    tabDate,
+                    currentIndex: -1
+                },
+                methods:{
+                    abc(i){
+                        this.currentIndex = this.currentIndex === i ? -1 : i
+                    }
+                }                 
+            })
+        </script>
+	</body>
+</html>
