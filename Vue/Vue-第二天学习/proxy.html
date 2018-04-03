@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <button id="btn">改变title</button>
+        <h3 id="h3"></h3>
+    </div>
+    <script src="src/vue.js"></script>
+    <script>
+        /*
+            Object.definrProperty()
+                代理一个属性
+            proxy  代理对象
+                proxy 用于修改某些操作的默认行为，等同于在语言层面做出修改，
+                    所以属于一种'元编程'(meta programming),即对编程语言进行编程。
+                可以理解成，在目标对象之前假设一层'拦截'，外界对该对象的访问，都必须先通过这层拦截
+
+        */
+        let data = {
+            title:'hello,vue',
+            title:'hello,vue',
+            title:'hello,vue'
+        }
+        
+        //数据劫持  把数据的每一项转成getter/setter形式
+        data = observer(data);
+        h3.innerHTML = data.title;
+        btn.onclick = function(){
+            data.title = "123"
+        }
+
+        let vue = {
+            a:1,
+            b:2
+        }
+
+        let m = new Proxy(vue,{
+            get(target,attr){ //操作每个属性都会触发
+                console.log(target,attr)
+                return target[attr];
+            },
+            set(target,attr,newVal){
+                console.log(target,attr,newVal)
+                target[attr] = newVal
+            }
+        })
+        m.a =10
+        console.log(m.a)
+        console.log(m.b)
+
+        function observer(data){
+            return new Proxy(data,{
+                get(target,attr){ //操作每个属性都会触发
+                    console.log(target,attr)
+                    return target[attr];
+                },
+                set(target,attr,newVal){
+                    console.log(target,attr,newVal)
+                    target[attr] = newVal;
+                    h3.innerHTML = data.title;
+                }
+            })
+        }
+    </script>
+</body>
+</html>

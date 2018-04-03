@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="app">
+        <p>{{title}}</p>
+        <p>{{users.leo}}</p>
+        <p>{{users.momo}}</p>
+        <p>{{users.cc}}</p>
+    </div>
+    
+    <script src="src/vue.js"></script>
+    <script>
+        /*
+            vue那些可以响应的数据，是预先计划好的，没有计划，未来需添加的属性，不能响应
+            注意对象不能是Vue 实例，或者Vue实例的根数据对象
+
+            添加属性，并且可以相应
+
+            Vue.set(obj,'attr','value')
+            实例.$set(obj,'attr','value')
+            删除
+            Vue.delete(obj,'attr')
+            实例.$delete(obj,'attr')
+        */
+        let vm = new Vue({
+            el:'#app',
+            data:{
+                title:'123',
+                users:{
+                    leo:'leo'
+                }
+            }
+        })
+        console.log(vm)
+        document.onclick = function(){
+            //没有规划一个属性，未来才规划，并且需要让这个属性也是响应的
+            Vue.set(vm.users,'momo','momo')
+            vm.$set(vm.users,'momo','momo')
+
+            //重新设置新的对象
+            vm.users = Object.assign({cc:'cc'},vm.users)
+            //删除
+            Vue.delete(vm.users,'leo')
+        }
+    </script>
+</body>
+</html>

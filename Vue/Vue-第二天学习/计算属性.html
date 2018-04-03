@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <p>{{title}}</p>
+        {{reverseTitle}}
+        <p v-for="item in list" v-if="item%2 !== 0">{{item}}</p>
+        {{filterList}}
+    </div>
+    <script src="src/vue.js"></script>
+    <script>
+        /*
+            变异方法
+                push()/pop()/unshift()/splice()/sort()/reverse()
+
+                目的就是在操作数据后，能够更新视图，改写了这些方法，变异方法
+            使用length改变数组，不响应
+            使用下标改变数组，不响应
+
+            模板中尽可能的少些逻辑，否则模板会臃肿，不好维护
+            需要把data中的数据做进一步的处理
+            需要把处理的data的逻辑抽离出来，不放在模板中
+
+            计算 属性
+                就是属性，通过一堆的逻辑判断最终的一个值，
+                computed
+                    问题:可以取值可以设置值
+            
+            设置属性 methods
+                当需要把值计算一次，然后多次使用，不需要重复计算，选择计算属性
+                每次都需要重新计算一个值，需要使用methods
+        */
+        new Vue({
+            el:'#app',
+            data:{
+                title:'hello，vue',
+                list:[1,2,3,4,5,6,7,8]
+            },
+            computed:{
+                reverseTitle:function(){
+                    return this.title.split('').reverse().join('')
+                },
+                filterList(){
+                    let newList = this.list.filter(item => {
+                        if(item === 4){
+                            return item;
+                        }
+                        if(item %2 !== 0){
+                            return item
+                        }
+                    })
+                    return newList.join(',')
+                }
+            }
+        })
+    </script>
+</body>
+</html>

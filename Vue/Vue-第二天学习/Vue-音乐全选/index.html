@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        ul{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        #app{
+            width: 600px;
+            height: 500px;
+            background-color: paleturquoise;
+            margin: 0 auto;
+        }
+        #app ul{
+            padding: 20px;
+        }
+        ul li{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+        .list{
+            background-color: palegoldenrod;
+        }
+        .tj{
+            padding: 20px;
+        }
+        .tj div{
+            float: left;
+        }
+        .others{
+            margin-left: 30px;
+        }
+        .others span{
+            margin-right: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <ul class="list">
+            <li>
+                <div>
+                    <input type="checkbox" v-model="isChecked">全选
+                </div>
+                <span>歌单</span>
+                <span>歌手</span>
+                <span>专辑</span>
+            </li>
+        </ul>
+        <ul>
+            <li v-for="item in data">
+                <div>
+                    <input type="checkbox" v-model="item.checked">
+                </div>
+                <span>{{item.song}}</span>
+                <span>{{item.name}}</span>
+                <span>{{item.album}}</span>
+            </li>
+        </ul>
+        <div class="tj">
+            <div class="selectAll">
+                <span>统计：</span>               
+            </div>
+            <div class="others">
+                <span>选中：{{checkedLength}}位歌手</span>
+                <span>歌手有：{{data.length}}位</span>
+                <span>专辑有{{album}}张</span>
+            </div>
+        </div>
+    </div>
+    <script src="src/vue.js"></script>
+    <script>
+        let data = [
+            {
+                checked:false,
+                song:'动物世界',
+                name:'薛之谦',
+                album:10
+            },
+            {
+                checked:false,
+                song:'动物世界',
+                name:'薛之谦',
+                album:10
+            },
+            {
+                checked:false,
+                song:'动物世界',
+                name:'薛之谦',
+                album:10
+            }
+        ]
+        new Vue({
+            el:'#app',
+            data:{
+                data
+            },
+            computed:{
+                album(){
+                    let n = 0;
+                    this.data.forEach((item) => {
+                        n += item.album
+                    })
+                    return n
+                },
+                isChecked:{
+                    get(){
+                        return this.data.every(item => item.checked);
+                    },
+                    set(newVal){
+                        return this.data.forEach(item => item.checked = newVal)
+                    }
+                },
+                checkedLength(){
+                    return this.data.filter(item => item.checked).length
+                }
+            }
+        })
+    </script>
+</body>
+</html>
