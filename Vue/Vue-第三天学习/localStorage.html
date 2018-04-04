@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			/*
+				localStorage 本地存储
+					一个网站能存5M大小,缓存一些常用的文件数据
+
+					localStorage跨站不能共享
+					关闭浏览器不会清空，手动清空
+					存
+						localStorage.setItem(key,value)
+
+						value值是文本
+							对象/数组 默认 转成字符串
+							转成JSON字符串
+					取
+						localStorage.getItem(key)
+			*/
+
+			localStorage.setItem('cc',123);
+			console.log(localStorage.getItem('cc')); //[123]
+
+			localStorage.setItem('cc',{a:1});
+			console.log(localStorage.getItem('cc'));//[object Object]
+
+			localStorage.setItem('cc123',JSON.stringify({a:1}));
+			console.log(JSON.parse(localStorage.getItem('cc123')));//{a:1}
+
+			localStorage.setItem('cc1456',JSON.stringify([1,2,3,4]));
+			console.log(JSON.parse(localStorage.getItem('cc1456')));//[1, 2, 3, 4]
+
+			// getItem返回值 没取到是null
+
+			console.log(localStorage.getItem('abc'));  //null
+			console.log(JSON.parse(null));  //null
+
+
+		</script>
+	</head>
+
+	<body>
+		
+	</body>
+</html>

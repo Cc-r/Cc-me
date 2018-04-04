@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script src="./src/vue.js"></script>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<div id="app">
+			<button @click="title = '改变了'">改变title</button>
+			<p id="test">{{title}}</p>
+			<button @click="miaov.ketang.a = '改变了'">改变a</button>
+			<p>{{miaov.ketang.a}}</p>
+		</div>
+		<script>
+            
+			// watch
+			/*
+				vm.$watch(属性/属性的路径,函数)
+					当属性值发生变化，函数执行
+			*/
+			let vm = new Vue({
+				el: "#app",
+				data:{
+					title: 'hello',
+					list: [1,2,3],
+					miaov:{
+						ketang: {
+							a:1,
+							c:1,
+							d:4
+						}
+					}
+				},
+				watch:{
+					title(){
+						console.log('1111111');
+					},
+					'miaov.ketang.a'(){
+						console.log('a改变了');
+					},
+					// 监控的是ketang这个对象发生变化
+					/*'miaov.ketang'(){
+						console.log('ketang改变了');
+					}*/
+					"miaov.ketang":{
+						deep: true,
+						handler(){
+							console.log('miaov中发生了变化');
+						}
+					}
+				}
+			})
+
+			vm.$watch('title',function (){
+				console.log('123');	
+			})
+			vm.$watch('miaov.ketang.a',function (newValue,oldValue){
+				console.log('456',newValue,oldValue);	
+			})
+
+			document.onclick = function (){
+				vm.$set(vm.miaov.ketang,'b',1)	
+			}
+
+
+		</script>
+	</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script src="./src/vue.js"></script>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<div id="app">
+			<button @click="changeTitle">改变title</button>
+			<p id="test">{{title}}</p>
+			<ul id="list">
+				<li v-for="item in list">{{item}}</li>
+			</ul>
+		</div>
+		<script>
+			new Vue({
+				el: "#app",
+				data:{
+					title: 'hello',
+					list: [1,2,3]
+				},
+				methods:{
+					changeTitle(){
+						this.title = '改变123'
+						this.title = '改变123'
+						this.list.push(4,5);  // [fn1,fn2]
+						/*
+							更新视图是异步的
+							改变数据之后，不会立马更新视图,Vue会开启一个更新的队列
+
+							等到所有的程序执行完成之后，执行队列中的任务，更新视图
+
+						*/
+						// 找p标签，打印内容
+						console.log(test.innerHTML); //hello
+						console.log(list.innerHTML); //<li>1</li><li>2</li><li>3</li>
+
+						// 获取最新的DOM，需要在更新之后获取，什么时候更新完了呢？
+
+						// 在DOM更新之后，执行回调函数
+						this.$nextTick(function (){
+							console.log(test.innerHTML);//改变123
+							console.log(list.innerHTML);//<li>1</li><li>2</li><li>3</li><li>4</li><li>5</li>
+						})
+						//Vue.nextTick()
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

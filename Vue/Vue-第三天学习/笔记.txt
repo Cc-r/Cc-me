@@ -1,0 +1,286 @@
+MVC
+	m -> model 数据模型 {}
+	v -> vive 视图模型 	html
+	c -> controlle	控制层
+
+MVVM
+	m -> model 数据模型 {}
+	v -> vive 视图模型 	html
+	vm -> vive-model 	视图数据模型
+
+前端库的演化
+	prototype.js  在内置对象的原型上添加方法
+		Array.prototype.a = function(){}
+	
+	jquery.js/zepto.js 抹平了浏览器对DOM兼容性的差异
+	YUI.js/kissY.js  模块化、按需加载
+		模块加载器 sea.js（CMD） require.js(AMD)
+		ES6中的module 
+		node端用CommonJS
+	backbone.js MVC框架
+					
+	Angularjs 1 2 3 4 5 MVVM框架  双向数据绑定
+	Vue.js MVVM框架 借鉴了Angularjs
+	React.js  只关心View
+
+	like-array  类数组
+	like-jquery
+	like-react
+
+vue
+	引入文件vue.js之后，全局就可以使用vue这个构造函数了
+	new Vue({---选项对象   告诉vue做什么事情
+		el(element):元素、选择器   告诉Vue那一块作为模板
+		data:{ ---数据对象---
+			这里面的数据，可以直接在模板中使用
+		}
+	})
+	<h2>
+        ---插值
+		    文本插值{{表达式}} "Mustache" 小胡子---
+		{{title}}
+	</h2>
+
+    ---声明式---
+        只需要声明在哪里where 做什么what，而无需关心如何实现how
+        使用的方法或者库、框架，会做具体的事情，隐藏了实现的细节，开发者按照提供的规范方式，写在对饮的位置
+    new Vue({
+        el:"#app"
+        data:{title:title}
+    })
+    ---命令式---
+        需要以具体代码表达在哪里where做什么what，如何实现how
+        每一步都需要自己实现
+    /例子/每个数*2放到新数组中
+    let arr = [1,2,3,4];
+    let newArr =[];
+    for(let i = 0; i < arr.length;i++){
+        newArr.push(arr[i] * 2)
+    };
+    /声明式/
+    let newArr2 = arr.map(item => item * 2);
+    
+原生的更新视图
+    innerHTML更新视图
+        元素不会复用，每次都会重新生成
+    数据的变化
+        数据发生变化，视图需要手动调用渲染
+    理想状态
+        数据发生变化，视图自动更新到合理的状态
+        元素可以复用
+
+响应式的数据绑定
+    响应式数据绑定 当数据发生变化，视图自动更新
+    好处，注意力放在数据的逻辑上
+    类似响应式布局一样，当浏览器尺寸（数据）发生变化，视图会自动布局
+
+    渲染视图的视图，以最小的代价来操作DOM，数据发生变化，绑定这个变化的数据的DOM才会更新，其他的元素并不会重新生成，vue会复用这些元素，更高效 
+
+    数据会做一个对比，前后数据不变化，不渲染视图
+
+    虚拟DOM  
+    diff
+
+指令
+    1.是一种特殊自定义行间属性，以v-开头
+    2.将数据和DOM做管理，当表达式的值改变时，响应式的作用在视图
+    3.预期的值为javascript表达式
+
+不同指令，作用是不一样的，指令时内置的指令
+    v-bind 使用在标签行间
+    语法：v-bind:属性名="表达式"
+    作用：动态绑定数据
+    简写：:
+    v-for 根据数据循环对应的标签
+    语法：
+        v-for="(value,index) in 数组"
+            value,index 是变量名，不固定 a,b
+        v-for="value in 数组"
+
+        v-for="(value,key,index) in 对象"
+    
+    v-if
+        语法： v-if="表达式"
+        作用：根据表达式这个布尔值来决定使用这个指令的元素要不要渲染（要不要放在DOM中）
+            true 渲染
+            false 不渲染
+    v-show	
+        语法： v-if="表达式"
+        作用：根据表达式这个布尔值来决定使用这个指令的元素显式隐藏（元素在DOM中）
+            true 显示
+            false 隐藏
+
+    根据条件，不成立不渲染某块结构，建议使用v-if
+                频繁的切换结构显示隐藏 使用v-show
+
+事件系统
+    尽可能避免操作元素
+        操作数据（状态），状态映射到DOM上
+    操作元素
+        input自动获取焦点 input.focus()
+        元素的宽高
+        元素的位置
+        元素的样式
+        元素做动画
+
+    Vue中的事件系统
+        在元素的行间绑定
+        语法：v-on:事件名='表达式'
+        使用: v-on:事件名='表达式'
+                v-on:事件名='methods函数名字'
+                v-on:事件名='methods函数名字()'
+                    可以方便给这个方法传参
+                    在模板中写$event，代表的就是这个事件发生的事件对象，需要的时候手动传入到函数中
+        简写：@
+        模板写函数(),第一个参数不是事件对象
+        事件触发，执行表达式
+
+class和style处理样式
+    class
+        一个class根据某个条件成立与否，决定是否添加
+        :class='{class名字：表达式}'
+    style
+        :style="{display: 条件 ? 'block': 'none'}"
+
+事件修饰符
+    取消默认行为
+    阻止冒泡
+    判断键值
+        事件相关的细节
+    在调用的方法中不需要处理和事件相关的细节，专注处理业务逻辑
+
+    官网说法：方法只有纯粹的数据逻辑，而不是去处理 DOM 事件细节
+
+    事件修饰符
+        v-on:事件名.修饰符.修饰符 = '表达式'
+
+        .stop   stopPropagation
+        .prevent preventDefault
+        .capture capture
+        .self    只能在自己元素上触发
+        .once    只触发一次
+
+    Property or method "XXXXXX" is not defined 
+        意思是data methods没有定义
+.enter  13
+.tab
+.delete (捕获“删除”和“退格”键)
+.esc
+.space
+.up
+.down
+.left
+.right
+
+双向数据绑定
+    页面中在input中输入,改变数据
+    指令，v-model,用来创建双向数据绑定
+    语法糖:通常来说使用语法糖能够增加程序的可读性，从而减少程序代码出错的机会。
+    把多个语法合并为一个语法，方便使用
+    指令：v-model
+        把数据绑定在value上
+        帮你监听input事件
+        你可以用v-model指令在表单<input>及<textarea>元素上创建双向数据绑定。
+        他会根据空间类型自动选取正确的方法来更新元素
+
+        input type = 
+            text    value
+            checkbox checked
+            select  value
+            textarea    value
+    双向数据绑定
+        vue将数据对象和DOM进行绑定，彼此之间互相产生影响，
+        数据的改变会引起DOM的改变
+        DOM的改变也会引起数据的变化
+
+Object.defineProperty
+    给一个对象定义属性
+        对象.a = 10;
+
+    Object.defineProperty(obj,attr, descriptor)
+        数据描述
+                configurable   是否可以删除目标属性。默认为false
+                enumerable    此属性是否可以被枚举。默认为false
+                value               该属性对应的值，默认为 undefined
+                writable          属性的值是否可以被重写。默认为false
+        存取器描述
+                getter 是一种获得属性值的方法
+                setter是一种设置属性值的方法。
+                可以写configurable  、enumerable    
+                不能写value     writable 
+        Object.keys(object)
+			把对象所有的key值提取出来，放在数组中   
+
+proxy
+    Object.definrProperty()
+        代理一个属性
+    proxy  代理对象
+        proxy 用于修改某些操作的默认行为，等同于在语言层面做出修改，
+            所以属于一种'元编程'(meta programming),即对编程语言进行编程。
+        可以理解成，在目标对象之前假设一层'拦截'，外界对该对象的访问，都必须先通过这层拦截
+
+set
+    vue那些可以响应的数据，是预先计划好的，没有计划，未来需添加的属性，不能响应
+    注意对象不能是Vue 实例，或者Vue实例的根数据对象
+
+    添加属性，并且可以相应
+
+    Vue.set(obj,'attr','value')
+    实例.$set(obj,'attr','value')
+    删除
+    Vue.delete(obj,'attr')
+    实例.$delete(obj,'attr')
+
+计算属性
+    变异方法
+        push()/pop()/unshift()/splice()/sort()/reverse()
+
+        目的就是在操作数据后，能够更新视图，改写了这些方法，变异方法
+    使用length改变数组，不响应
+    使用下标改变数组，不响应
+
+    模板中尽可能的少些逻辑，否则模板会臃肿，不好维护
+    需要把data中的数据做进一步的处理
+    需要把处理的data的逻辑抽离出来，不放在模板中
+
+    计算 属性
+        就是属性，通过一堆的逻辑判断最终的一个值，
+        computed
+            问题:可以取值可以设置值
+    
+    设置属性 methods
+        当需要把值计算一次，然后多次使用，不需要重复计算，选择计算属性
+        每次都需要重新计算一个值，需要使用methods
+
+异步更新视图
+    更新视图是异步的
+    改变数据之后，不会立马更新视图,Vue会开启一个更新的队列
+
+    等到所有的程序执行完成之后，执行队列中的任务，更新视图
+    获取最新的DOM，需要在更新之后获取，什么时候更新完了呢？
+
+    在DOM更新之后，执行回调函数
+    this.$nextTick(function (){
+        console.log(test.innerHTML);//改变123
+        console.log(list.innerHTML);//<li>1</li><li>2</li><li>3</li><li>4</li><li>5</li>
+    })
+    Vue.nextTick()
+
+watch
+    vm.$watch(属性/属性的路径,函数)
+        当属性值发生变化，函数执行
+
+localStorage 本地存储
+    一个网站能存5M大小,缓存一些常用的文件数据
+
+    localStorage跨站不能共享
+    关闭浏览器不会清空，手动清空
+    存
+        localStorage.setItem(key,value)
+
+        value值是文本
+            对象/数组 默认 转成字符串
+            转成JSON字符串
+    取
+        localStorage.getItem(key)
+getItem返回值 没取到是null

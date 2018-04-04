@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>todos</title>
+    <link rel="stylesheet" type="text/css" href="css/base.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+
+<body>
+    <section class="todoapp">
+        <div>
+            <header class="header" >
+                <h1>todos</h1>
+                <input 
+                    class="new-todo" placeholder="请输入内容"   
+                    v-model="todo"                                   
+                    @keyup.enter="upenter"
+                />
+            </header>
+            <section class="main">
+                <input class="toggle-all" type="checkbox" v-model="isCheckedAll" />
+                <ul class="todo-list">
+                    <li 
+                        :class='{completed:item.checked,editing: item === editTitle}'
+                         v-for="item,index in filterData"
+                    >
+                        <div class="view">
+                            <input class="toggle" type="checkbox" v-model="item.checked"/>
+                            <label @dblclick="compileTitle(item,index)">{{item.title}}</label>
+                            <button class="destroy" @click="isDelete(item)"></button>
+                        </div>
+                        <input class="edit" ref="edit"
+                            v-model="item.title"
+                            @blur="compileItem(item)" 
+                            @keyup.13="compileItem(item)"
+                            @keyup.esc="complileCancel(item)"
+                        />
+                    </li>
+                </ul>
+            </section>
+            <footer class="footer">
+	            <span class="todo-count">
+	            	<strong>{{checkedLength}}</strong>
+	            	<span>条未选中</span>
+	            </span>
+	            <ul class="filters">
+	            	<li><a href="#/all" :class="{selected:hash === 'all'}">All</a></li> 
+	            	<li><a href="#/active" :class="{selected:hash === 'active'}">Active</a></li> 
+	            	<li><a href="#/completed" :class="{selected:hash === 'completed'}">Completed</a></li>
+	           	</ul>
+            </footer>
+        </div>
+    </section>
+    <script src="src/vue.js"></script>
+    <script src="js/index.js"></script>
+    <script>
+        /*
+            1. 增删改查数据，要使用localStorage做数据持久化
+            2. 根据hash不同，过滤渲染的数据
+                a. 全部任务
+                b. 完成的任务
+                c. 未完成的任务
+            3. 自己设计数据结构
+                
+        */
+    </script>
+</body>
+
+
+</html>
