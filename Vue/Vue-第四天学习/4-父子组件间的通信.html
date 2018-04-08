@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>父子组件间的通信</title>
+    <!-- <script type="text/x-template" id="news">
+        <div>
+            <h2>{{title}}</h2>
+            <ul>
+                <li v-for="item in list">{{item}}</li>
+            </ul>
+        </div>
+    </script> -->
+</head>
+<body>
+    <div id="app">
+        <button @click="title1='123'">父组件改变title</button>
+        <news :title="title1"></news>
+    </div>
+    <script src="src/vue.js"></script>
+    <script>
+        /*
+            el:只有根实例的选项对象才有
+            data:组件中的data必须是函数
+        */
+        Vue.component('news',{
+            data(){
+               return {// 组件自己的数据，可以在组件内修改
+                    newsData:'123',
+                    selfTitle: this.title //把props传过来的数据，作为初始值
+               }
+            },
+            props:{
+                title:{//必须传递一个字符串
+                    type:[String,Number],
+                    required:true
+                }
+            },
+            template: `
+                <div>
+                    <h2>{{title}}</h2>
+                    <button @click="title='子数据'">改变title</button>            
+                    <hr />
+                    <h2>{{selfTitle}}</h2>
+                    <button @click="selfTitle='改变了selfTitle'">改变selfTitle</button>
+                    <hr />
+                    <h2>new自己的数据</h2>
+                    <p>{{newsData}}</p>
+                    <button @click="newsData='修改自己'">改变newsData</button>
+                </div>
+            `
+        })
+        new Vue({
+            el:'#app',
+            data:{
+                title1:'新闻'
+            }
+        })
+    </script>
+</body>
+</html>

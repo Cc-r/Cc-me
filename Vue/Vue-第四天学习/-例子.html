@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			.tab{
+				width: 200px;
+				height: 200px;
+				border: 1px solid #000;
+			}
+			#app > div {
+				display: inline-block;
+				margin: 50px;
+			}
+		</style>		
+	</head>
+	<body>
+		<div id="app">
+			<div>
+				<h1>第一个面板</h1>
+				<div>
+					<button :style="{color:color1}">改变我的颜色</button>
+					<news @click-button="changeButtonColorHandle"></news>
+					<!-- <div class = "tab">
+						<ul>
+							<li>green</li>
+							<li>yellow</li>
+							<li>red</li>
+						</ul>
+						<button>确定</button>
+					</div> -->
+				</div>
+			</div>
+			<div>
+				<h1>第二个面板</h1>
+				<div>
+					<p :style="{color:color2}">改变我的颜色</p>	
+					<news @click-button="changeButtonColorHandle2"></news>			
+					<!-- <div class = "tab">
+						<ul>
+							<li>green</li>
+							<li>yellow</li>
+							<li>red</li>
+						</ul>
+						<button>确定</button>
+					</div> -->
+				</div>
+			</div>			
+		</div>
+		<script src="src/vue.js"></script>
+		<script>
+			/*
+				1. 把class为.tab的封装成一个组件
+				2. 在封装的组件内部可以单选一个颜色
+				3. 当点击组件内的确定，分别改变button和p标签的颜色为组件内选中的颜色
+
+			*/
+			Vue.component('news',{
+				data(){
+					return{
+						colors:['green','yellow','red'],
+						currentIndex:-1
+					}
+				},
+				template: `
+					<div class = "tab">
+						<ul>
+							<li 
+								:style="{background:i === currentIndex ? 'red' : ''}"
+								v-for="item,i in colors"
+								@click="currentIndex = i"
+							>{{item}}</li>
+						</ul>
+						<button @click="clickHandle">确定</button>
+					</div>`,
+				methods:{
+					clickHandle(){
+						this.$emit('click-button',this.colors[this.currentIndex])
+					}
+				}
+			})
+			new Vue({
+				el:"#app",
+				data:{
+					color1:'',
+					color2:''
+				},
+				methods:{
+					changeButtonColorHandle(params){
+						this.color1 = params
+						
+					},
+					changeButtonColorHandle2(params){
+						this.color2 = params
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

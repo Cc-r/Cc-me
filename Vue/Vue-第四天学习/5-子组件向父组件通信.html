@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>子组件向父组件通信</title>
+</head>
+<body>
+    <div id="app">
+        <h1>组件的学习</h1>
+        <p>{{title}}</p>
+        <button @click="title='123'">父组件改变title</button>
+        <news :title="title" @click-button="parentHandle"></news>
+    </div>
+    <script src="src/vue.js"></script>
+    <script>
+        Vue.component('news',{
+            data(){
+                return {
+                    newData:'123',//组件自己的数据，可以在组件内修改
+                    selfTitle:this.title//把props传过来的数据，作为初始值
+                }
+            },
+            props:{
+                title:{
+                    type:[String,Number],
+                    default:'啦啦啦'
+                }
+            },
+            template:`
+                <div>
+                    <hr />
+                    <hr />
+                    <h2>{{title}}</h2>
+                    <button @click="clickHandle">改变title</button>
+                </div>
+            `,
+            methods:{
+                clickHandle(){
+                    this.$emit('click-button','子数据')
+                }
+            }
+        })
+        new Vue({
+            el:'#app',
+            data:{
+                title:'新闻'
+            },
+            methods:{
+                parentHandle(params){
+                    console.log('父组件触发',params)
+                    this.title = params;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

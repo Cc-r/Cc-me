@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>props验证</title>
+    <!-- <script type="text/x-template" id="news">
+        <div>
+            <h2>{{title}}</h2>
+            <ul>
+                <li v-for="item in list">{{item}}</li>
+            </ul>
+        </div>
+    </script> -->
+</head>
+<body>
+    <div id="app">
+        <news title="1" :list="[1,2,3]" n="10" miaov="20"></news>
+        <news :title="1"></news>
+        <news title="新闻"></news>
+    </div>
+    <script src="src/vue.js"></script>
+    <script>
+        /*
+            el:只有根实例的选项对象才有
+            data:组件中的data必须是函数
+        */
+        Vue.component('news',{
+            //props:['title','list'],
+            props:{
+                //title:Number,                
+                //title:[String,Number],//多种可能的类型
+                /*title:{
+                    type:[String,Number],
+                    default:"标题"
+                }*/
+                title:{//必须传递一个字符串
+                    type:[String,Number],
+                    required:true
+                },                
+                list:{//类型是对象或者是数组，默认值必须是一个函数返回值
+                    type:Array,
+                    default(){
+                        return []
+                    }
+                },
+                n:{
+                    default:0
+                },
+                miaov:{ //自定义验证函数，true为通过，false不通过报错
+                    validator:function(value){
+                        return value > 10
+                    }
+                }
+            },
+            template: `
+                <div>
+                    <h2>{{title}}</h2>
+                    <p>{{n+1}}</p>
+                    <ul>
+                        <li>1</li>
+                    </ul>
+                </div>
+            `
+        })
+        new Vue({
+            el:'#app'
+        })
+        // console.log([] == ![])
+        // console.log([])
+        // console.log({})
+        // console.log(![])
+        // console.log(!{})
+    </script>
+</body>
+</html>

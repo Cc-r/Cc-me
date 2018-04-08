@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="./style.css">
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<div class="modal-example" id="app">
+			<div>{{text}}</div>
+        	<!-- <div class="modal">
+				<div class="modal-header">
+					<h4>这里是标题</h4>
+				</div>
+				<div class="modal-content">
+					<div>
+						在这里添加内容
+					</div>
+				</div>
+				<div class="modal-footer">
+					<input class="btn" type="button" value="确定" />
+					<input class="btn" type="button" value="取消" />
+				</div>
+			</div> -->
+			<news :title="title" :content="content" @click-button="Text"></news>
+		</div>
+		  <script src="../src/vue.js"></script>
+		<script>
+
+			Vue.component('news',{
+				props:{
+					title:{
+						type:[String,Number],
+						default:''
+					},
+					content:{
+						type:[String,Number],
+						default:''
+					}
+				},
+				template:`
+					<div class="modal">
+						<div class="modal-header">
+							<h4>{{title}}</h4>
+						</div>
+						<div class="modal-content">
+							<div>
+								{{content}}
+							</div>
+						</div>
+						<div class="modal-footer">
+							<input class="btn" type="button" value="确定" @click="ok" />
+							<input class="btn" type="button" value="取消" @click="ok"/>
+						</div>
+					</div>
+				`,
+				methods:{
+					ok(ev){
+						this.$emit('click-button',ev.target.value)	
+						console.log(ev.target.value)					
+					}
+				}
+			})
+			new Vue({
+				el:'#app',
+				data:{
+					title:'这里是标题',
+					content:'在这里添加内容',
+					text:''
+				},
+				methods:{
+					Text(parmes){
+						this.text = parmes
+					}
+				}
+			})
+		</script>
+	</body>
+</html>
