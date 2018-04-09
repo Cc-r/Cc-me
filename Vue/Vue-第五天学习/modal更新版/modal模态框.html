@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="./style.css">
+		<script type="text/x-template" id="news">
+			<div class="modal" v-show="value">
+				<div class="modal-header">
+					<slot name="header" :title="title">
+						<h4>{{title}}</h4>
+					</slot>								
+				</div>
+				<div class="modal-content">
+					<div>
+						<slot>
+							这里是内容
+						</slot>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<slot name="footer">
+						<input 
+							class="btn" 
+							type="button" 
+							:value="okValue" 
+							@click="okHandle"
+						/>
+						<input 
+							class="btn" 
+							type="button" 
+							:value="cancelValue" 
+							@click="cancelHandle"
+						/>
+					</slot>
+				</div>
+			</div>
+		</script>
+	</head>
+
+	<body>
+		<div class="modal-example" id="app">
+			<button @click="show=true">登录</button>
+			<modal 
+				title="222" 
+				ok-value="下一步" 
+				cancel-value="返回" 
+				@ok-click="clickHandle" 
+				@cancel-click="clickHandle"
+				v-model="show"
+			>
+				<form>
+					<input type="text">
+					<input type="text">
+					<input type="text">
+					<input type="text">
+				</form>	
+				<h2 slot="header" slot-scope="{title}">
+					<span>☺</span>
+					<span>{{title}}</span>
+				</h2>
+			</modal>
+		</div>
+		<script src="../src/vue.js"></script>
+		<script>
+			Vue.component('modal',{
+				props:{
+					title:{
+						type:String,
+						default:'这是一个标题'
+					},
+					okValue:{
+						type:String,
+						default:'确定'
+					},
+					cancelValue:{
+						type:String,
+						default:'取消'
+					},
+					value:{
+						type: Boolean,
+						default:false
+					}
+				},
+				template:'#news',
+				methods:{
+					okHandle(){
+						this.$emit('ok-click')
+						
+					},
+					cancelHandle(){
+						this.$emit('cancel-click')
+						this.$emit('input',false)
+					}
+					
+				}
+			})
+			new Vue({
+				el:'#app',
+				data:{
+					show:false
+				},
+				methods:{
+					clickHandle(){
+						console.log('执行了')
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

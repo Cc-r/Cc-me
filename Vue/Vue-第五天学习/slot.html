@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <news>
+            {{message}}
+            <p>123</p>
+            <div>555</div>
+        </news>
+        <news></news>
+    </div>
+    <script src="src/vue.js"></script>
+    <script>
+        Vue.component('news',{
+            template:`
+                <div>
+                    <h2>新闻</h2>
+                    <slot>
+                        <ul>
+                            <li>1</li>
+                        </ul>
+                    </slot>
+                    
+                </div>
+            `
+        })
+        new Vue({
+            el:'#app',
+            data:{
+                message:'父数据'
+            }
+        })
+    </script>
+</body>
+</html>
